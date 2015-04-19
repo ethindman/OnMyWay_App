@@ -1,0 +1,26 @@
+<div class="container"> 
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<h3>{{success}}</h3>
+			<h3>What is your current location?</h3>
+			<input type="text" class='form-control' ng-model='newMessage.location'>
+			<h3>What's your ETA?</h3>
+			<input type="text" class='form-control' ng-model='newMessage.eta'>
+			<h3>Who do you want to alert?</h3>
+ 
+			<!--ng repeat for contacts in db goes here -->
+			<select name="contacts" class='form-control' ng-model='newMessage.contact'>
+				<option>Mom</option>
+				<option>Dad</option>
+				<option>Sister</option>	
+			</select>
+			<br>
+			<button class='btn brownButton pull-right hvr-underline-from-center' ng-click='create(newMessage)'>Alert!</button>
+		<!-- 	<button ng-click="test()">Test</button> -->
+		</div>
+		<div class="col-md-4"></div>
+	</div>
+</div>	 
+ 
+ 			 

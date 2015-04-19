@@ -1,0 +1,40 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-md-6 col-lg-6">
+			<h1>Create Your Account</h1>
+			<form id='registration'>
+			  	<div class="form-group">
+				    <label for="firstName">What's your full name?</label>
+				    <input type="text" class="form-control" placeholder="Full Name" ng-model='newUser.full_name'>
+			  	</div>
+				<div class="form-group">
+				    <label for="Email">What's your email address?</label>
+				    <input type="text" class="form-control" placeholder="Email Address" ng-model='newUser.email'>
+			  	</div>
+			   	<div class="form-group">
+				    <label for="homeAddress">And your home address?</label>
+				    <input type="text" class="form-control" placeholder="Homebase" ng-model='newUser.address'>
+			 	 </div>
+				<div class="form-group">
+				    <label>Create a strong password:</label>
+				    <input type="Password" class="form-control" placeholder="Password" ng-model='newUser.password'>
+			  	</div>
+			  	<div class="form-group">
+				    <label>Confirm that strong password: </label>
+				    <input type="Password" class="form-control" placeholder="Confirm Password">
+			  	</div>				 
+				<h3>Now, let's add at least one person from your inner-circle to your list of contacts:</h3>
+				 <div class="form-group">
+				    <label>Your number one's name: </label>
+				    <input type="text" class="form-control" placeholder="Your number one's name..." ng-model="newUser.contactName">
+			  	</div>	
+			  	<div class="form-group">
+				    <label>Your number one's email address: </label>
+				    <input type="text" class="form-control" placeholder="Your number one's email..." ng-model="newUser.contactEmail">
+			  	</div>
+				<button class='btn brownButton pull-right' ng-click='addUser(newUser)'>Submit</button>
+
+			</form>
+		</div>
+	</div>
+</div>
