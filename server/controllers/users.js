@@ -42,6 +42,7 @@ module.exports = (function (){
 			});
 		},
 
+		// log-in user
 		login: function(request, response){
 			User.findOne({email: request.body.email, password: request.body.password}, function(error, data){
 				if(error){
@@ -60,32 +61,33 @@ module.exports = (function (){
 			});
 		},
 
-		message: function(request, response){
+		// send meassge
+		message: function(request, response) {
 			
-			console.log(request.body);
 			var transporter = nodemailer.createTransport({
-				    service: 'Gmail',
-				    auth: {
-				        user: 'sender123@gmail.com',
-				        pass: 'password'
-			    	}
+		    service: 'Gmail',
+		    auth: {
+	        user: 'sender123@gmail.com',
+	        pass: 'password'
+	    	}
 			});
 
 			var mailOptions = {
-    			from: 'UserName  <sender123@gmail.com>', // sender address
-   				to: 'recipient123@gmail.com', // list of receivers
-			    subject: 'On My Way ', // Subject line
-			    text: "Hey "+ request.body.contact + " I'm running late. I'm in " + request.body.location + " . I'll be there in "+ request.body.eta+".", // plaintext body
-			    html: "Hey "+ request.body.contact + "I'm running late. I'm in " + request.body.location + " . I'll be there in "+ request.body.eta+"."
+				from: 'UserName  <sender123@gmail.com>', // sender address
+					to: 'recipient123@gmail.com', // list of receivers
+		    subject: 'On My Way ', // Subject line
+		    text: "Hey "+ request.body.contact + " I'm running late. I'm in " + request.body.location + " . I'll be there in "+ request.body.eta+".", // plaintext body
+		    html: "Hey "+ request.body.contact + "I'm running late. I'm in " + request.body.location + " . I'll be there in "+ request.body.eta+"."
 			};
 
-			transporter.sendMail(mailOptions, function(error, info){
-			    if(error){
-			        console.log(error);
-			    }else{
-			        console.log('Message sent: ' + info.response);
-			        response.json(info);
-			    }
+			transporter.sendMail(mailOptions, function(error, info) {
+		    if(error) {
+	        console.log(error);
+		    }
+		    else {
+	        console.log('Message sent: ' + info.response);
+	        response.json(info);
+		    }
 			});
 		}
 
