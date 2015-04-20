@@ -25,42 +25,8 @@
 
 </head>
 <body>
-	<nav class="navbar navbar-inverse navbar color">
-	  <div class="container">
-	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-	        <span class="sr-only">Toggle navigation</span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	      </button>
-	      
-	      <div ng-controller="UsersController">
-	      	<a class="navbar-brand" href="#/">Hello {{$storage.username}}!</a>
-	      </div>
-	    
-	    </div>
-	    <div id="navbar" class="navbar-collapse collapse">
-	      <div class="navbar-form navbar-right">
-	        <a href="#/new">
-	        	<div ng-controller="UsersController">
-	        		<button type="submit" class="btn btn-success btn logOut button hvr-underline-from-center" ng-click="logout()">Logout</button>
-	        		<a href="#/{{$storage.userId}}">
-	        			<button type="submit" class="btn btn-success btn logOut button hvr-underline-from-center">Settings</button>
-	        		</a>
-	        	</div>
-	        </a>
-	      </div>
-	    </div><!--/.navbar-collapse -->
-	  </div>
-	</nav>	
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
 
-				<div ng-view=''></div>
-			</div>
-		</div>
-	</div>
+		<div ng-view=''></div>
+
 </body>
 </html>

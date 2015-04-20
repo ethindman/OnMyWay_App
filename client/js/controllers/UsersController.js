@@ -3,12 +3,15 @@ app.controller('UsersController', function($scope, $routeParams, $localStorage, 
 	// set session data
 	$scope.$storage = $localStorage;
 
-	if(!$routeParams.id) {
-			UserFactory.getContacts($localStorage.userId, function(data){ 
-				$scope.current_user = data;
+	// get user's contacts
+	var getContacts = function() {
+		UserFactory.getContacts($localStorage.userId, function(data){ 
+			$scope.current_user = data;
 		});
 	}
+	getContacts();
 
+	// create new user
 	$scope.addUser = function(newUser) {
 		UserFactory.addUser(newUser, function(data) {
 			$localStorage.username = data.full_name;
@@ -17,49 +20,54 @@ app.controller('UsersController', function($scope, $routeParams, $localStorage, 
 		});
 	}
 
-	$scope.logout = function() {
-    	delete $localStorage.username;
-    	delete $localStorage.userId;
-    	$location.path('/');
-  	};
-
-  	$scope.login = function(user) {
-  		UserFactory.login(user, function(result){
-  			if(result !=null)
-			{
+  // log-in user
+	$scope.login = function(user) {
+		UserFactory.login(user, function(result){
+			if(result !=null) {
 				$localStorage.username = result.full_name;
 				$localStorage.userId = result._id;
+				$scope.success = "Login successful!";
 				$location.path('/home');
 			}		
-			else
-			{
+			else {
 				$scope.error = "Invalid Email or Password";
 			}
-  		});
-  	}
+		});
+	}
 
-  	$scope.create = function(newMessage){
-  		UserFactory.create(newMessage, function(data){
-  			$scope.success = 'Message successfully sent!';
-  			$scope.newMessage = {};
-  		});
-  	}
+	// log-out user
+	$scope.logout = function() {
+    delete $localStorage.username;
+    delete $localStorage.userId;
+  };
 
-  	$scope.add = function(newContact){
-  		newContact['userId'] = $localStorage.userId;
-  		UserFactory.add(newContact, function(data){
-  			$scope.contacts = data;
-  			$scope.newContact = {};
-  			$scope.success = "You added a new contact!";
-   		});
-  	}
+  // create message
+	$scope.create = function(newMessage){
 
-  	// destroy contact
-  	$scope.destroy = function(contact) {
-  		contact['current_user_id'] = $localStorage.userId;
-  		UserFactory.destroy(contact, function(data){
-  			$scope.success = "Contact successfully deleted";
-  		});
-  	}
+		console.log(newMessage);
+		// UserFactory.create(newMessage, function(data){
+		// 	$scope.success = 'Message successfully sent!';
+		// 	$scope.newMessage = {};
+		// });
+	}
+
+	// create new contact
+	$scope.add = function(newContact){
+		newContact['userId'] = $localStorage.userId;
+		UserFactory.add(newContact, function(data){
+			$scope.success = "You added a new contact!";
+			getContacts();
+ 		});
+		$scope.newContact = {};
+	}
+
+	// destroy contact
+	$scope.destroy = function(contact) {
+		contact['current_user_id'] = $localStorage.userId;
+		UserFactory.destroy(contact, function(data){
+			$scope.success = "Contact successfully deleted";
+			getContacts();
+		});
+	}
 
 });
