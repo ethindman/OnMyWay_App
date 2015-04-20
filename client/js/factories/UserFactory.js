@@ -1,7 +1,15 @@
 app.factory('UserFactory', function($http) {
 	
-	var  users = [];
 	var factory = {};
+	var contacts = [];
+
+	//get all contacts
+	factory.getContacts = function(id, callback) {
+		$http.get('/users/'+ id).success(function(data) {
+			callback(data);
+
+		});
+	}
 
 	// add user
 	factory.addUser = function(newUser, callback) {
@@ -13,13 +21,28 @@ app.factory('UserFactory', function($http) {
 	factory.login = function(user, callback){
 		$http.post('/users/login', user).success(function(result){ 
 			callback(result);
-		})
+		});
 	}
 
 	factory.create = function(message, callback){
 		$http.post('/users/message', message).success(function(data){
 			callback(data);
-		})
+		});
+	}
+
+	factory.add = function(newContact, callback) {
+		console.log('in factory for add');
+		$http.post('/users/addContact', newContact).success(function(data){
+			contacts.push(data);
+			callback(contacts);
+		});
+	}
+
+	factory.destroy = function(contact, callback) {
+		$http.post('/users/destroy', contact).success(function(data){
+			contacts.splice(contacts.indexOf(data), 1);
+			callback(data);
+		});
 	}
 
 

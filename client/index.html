@@ -45,6 +45,9 @@
 	        <a href="#/new">
 	        	<div ng-controller="UsersController">
 	        		<button type="submit" class="btn btn-success btn logOut button hvr-underline-from-center" ng-click="logout()">Logout</button>
+	        		<a href="#/{{$storage.userId}}">
+	        			<button type="submit" class="btn btn-success btn logOut button hvr-underline-from-center">Settings</button>
+	        		</a>
 	        	</div>
 	        </a>
 	      </div>

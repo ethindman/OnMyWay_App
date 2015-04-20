@@ -14,8 +14,8 @@ app.config(function($routeProvider) {
 		templateUrl: 'partials/home.html',
 		controller: 'UsersController'
 	})
-	.when('/settings', {
-		templateUrl: 'partials/settings.html',
+	.when('/:id', {
+		templateUrl: 'partials/contacts.html',
 		controller: 'UsersController'
 	})
 	.when('/contacts', {
