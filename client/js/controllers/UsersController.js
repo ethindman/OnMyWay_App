@@ -9,14 +9,6 @@ app.controller('UsersController', function($scope, $routeParams, $localStorage, 
 		});
 	}
 
-	// $scope.test = function() {
-	// 	console.log("got here");
-	// 	console.log("This is local storage:", $localStorage);
-	// 	console.log("This is username:", $localStorage.username);
-	// 	console.log("This is userId:", $localStorage.userId);
-	// 	console.log("This is scope.storage", $scope.$storage);
-	// }
-
 	$scope.addUser = function(newUser) {
 		UserFactory.addUser(newUser, function(data) {
 			$localStorage.username = data.full_name;
@@ -52,7 +44,6 @@ app.controller('UsersController', function($scope, $routeParams, $localStorage, 
   			$scope.newMessage = {};
   		});
   	}
-
 
   	$scope.add = function(newContact){
   		newContact['userId'] = $localStorage.userId;

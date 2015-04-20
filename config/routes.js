@@ -15,22 +15,28 @@ module.exports = function(app) {
 		users.create(request, response);
 	});
 
+	// login user
 	app.post('/users/login', function(request, response){
 		users.login(request, response);
 	})
 
-	app.post('/users/message', function(request, response){
-		users.message(request, response);
-	})
+	// get estimate travel time
+	app.post('/users/travelTime', function(request, response){
+		users.travelTime(request, response);
+	});
 
+	app.post('/users/createMessage', function(request, response) {
+		users.createMessage(request, response);
+	});
+
+	// add contact
 	app.post('/users/addContact', function(request, response){
-		console.log('in routes for add contact');
 		users.addContact(request, response);
+	});
 
-	})
-
+	// destroy contact
 	app.post('/users/destroy', function(request, response){
 		users.destroy(request, response);
-	})
+	});
 
 };

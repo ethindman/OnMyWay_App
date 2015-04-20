@@ -1,10 +1,7 @@
-//server side controller
-
 var mongoose = require('mongoose');
-// var should be singular and capitalized
 var User = mongoose.model('User');
-
 var nodemailer = require('nodemailer');
+var npmRequest = require('request');
 
 module.exports = (function (){
 	return {
@@ -81,23 +78,45 @@ module.exports = (function (){
 			});
 		},
 
-		// send meassge
-		message: function(request, response) {
+		// get estimate travel time
+		travelTime: function(request, response) {
 			
+			var TravelTimeId = request.body.TravelTimeId
+
+			npmRequest({
+
+				uri: "http://www.wsdot.wa.gov/Traffic/api/TravelTimes/TravelTimesREST.svc/GetTravelTimeAsJson?AccessCode=23b98b49-07ee-462b-bba1-759e215ddee0&TravelTimeID="+TravelTimeId,
+				method: "GET",
+				timeout: 10000,
+				followRedirect: true,
+				maxRedirects: 10
+			}, function(error, data) {
+				if(error) {
+					console.log(error, "Oops! It's not working!");
+				}
+				else {
+					console.log("Request SUCCESS!");
+					response.json(JSON.parse(data.body));
+				}
+			});
+		},
+
+		createMessage: function(request, response) {
+
 			var transporter = nodemailer.createTransport({
 		    service: 'Gmail',
 		    auth: {
-	        user: 'sender123@gmail.com',
-	        pass: 'password'
+	        user: 'service123@gmail.com',
+	        pass: 'PASSWORD'
 	    	}
 			});
 
 			var mailOptions = {
-				from: 'UserName  <sender123@gmail.com>', // sender address
-					to: 'recipient123@gmail.com', // list of receivers
+				from: 'UserName  <service123@gmail.com>', // sender address
+					to: 'user123@gmail.com', // list of receivers
 		    subject: 'On My Way ', // Subject line
-		    text: "Hey "+ request.body.contact + " I'm running late. I'm in " + request.body.location + " . I'll be there in "+ request.body.eta+".", // plaintext body
-		    html: "Hey "+ request.body.contact + "I'm running late. I'm in " + request.body.location + " . I'll be there in "+ request.body.eta+"."
+		    text: "Hey " + request.body.contact + " I'm running late. I'm in " + request.body.location + " . I think I'll be there in "+ request.body.eta+" but the Washington State Department of Transportation estimates I'll be there in "+ request.body.CurrentTime+" minutes.", // plaintext body
+		    html: "Hey " + request.body.contact + " I'm running late. I'm in " + request.body.location + " . I think I'll be there in "+ request.body.eta+" but the Washington State Department of Transportation estimates I'll be there in "+ request.body.CurrentTime+" minutes."
 			};
 
 			transporter.sendMail(mailOptions, function(error, info) {
@@ -110,6 +129,7 @@ module.exports = (function (){
 		    }
 			});
 		},
+
 
 		addContact: function(request, response) {
 			console.log('got here');

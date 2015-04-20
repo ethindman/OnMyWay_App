@@ -5,11 +5,17 @@
 			<h3>{{success}}</h3>
 			<h3>What is your current location?</h3>
 			<input type="text" class='form-control' ng-model='newMessage.location'>
+			<h3>What's your route?</h3>
+			<p>(psst, providing route will give estimate travel time based on WSDOT data)</p>
+			<select name="contacts" class='form-control' ng-model='newMessage.TravelTimeId'>
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>	
+			</select>
 			<h3>What's your ETA?</h3>
 			<input type="text" class='form-control' ng-model='newMessage.eta'>
 			<h3>Who do you want to alert?</h3>
- 
-			<!--ng repeat for contacts in db goes here -->
+ 			<!--ng repeat for contacts in db goes here -->
 			<select name="contacts" class='form-control' ng-model='newMessage.contact'>
 				<option>Mom</option>
 				<option>Dad</option>

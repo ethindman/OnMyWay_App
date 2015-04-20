@@ -25,8 +25,11 @@ app.factory('UserFactory', function($http) {
 	}
 
 	factory.create = function(message, callback){
-		$http.post('/users/message', message).success(function(data){
-			callback(data);
+		$http.post('/users/travelTime', message).success(function(data){
+			message['CurrentTime'] = data.CurrentTime;
+			$http.post('/users/createMessage', message).success(function(data) {
+				callback(data);
+			});
 		});
 	}
 
