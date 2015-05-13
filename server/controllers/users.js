@@ -106,14 +106,14 @@ module.exports = (function (){
 			var transporter = nodemailer.createTransport({
 		    service: 'Gmail',
 		    auth: {
-	        user: 'service123@gmail.com',
-	        pass: 'PASSWORD'
+	        user: '',
+	        pass: ''
 	    	}
 			});
 
 			var mailOptions = {
-				from: 'UserName  <service123@gmail.com>', // sender address
-					to: 'user123@gmail.com', // list of receivers
+				from: 'Akash  <asa249@gmail.com>', // sender address
+					to: 'eliotc1986@gmail.com', // list of receivers
 		    subject: 'On My Way ', // Subject line
 		    text: "Hey " + request.body.contact + " I'm running late. I'm in " + request.body.location + " . I think I'll be there in "+ request.body.eta+" but the Washington State Department of Transportation estimates I'll be there in "+ request.body.CurrentTime+" minutes.", // plaintext body
 		    html: "Hey " + request.body.contact + " I'm running late. I'm in " + request.body.location + " . I think I'll be there in "+ request.body.eta+" but the Washington State Department of Transportation estimates I'll be there in "+ request.body.CurrentTime+" minutes."

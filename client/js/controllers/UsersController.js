@@ -45,10 +45,10 @@ app.controller('UsersController', function($scope, $routeParams, $localStorage, 
 	$scope.create = function(newMessage){
 
 		console.log(newMessage);
-		// UserFactory.create(newMessage, function(data){
-		// 	$scope.success = 'Message successfully sent!';
-		// 	$scope.newMessage = {};
-		// });
+		UserFactory.create(newMessage, function(data){
+			$scope.success = 'Message successfully sent!';
+			$scope.newMessage = {};
+		});
 	}
 
 	// create new contact

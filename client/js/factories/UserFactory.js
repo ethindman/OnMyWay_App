@@ -19,6 +19,7 @@ app.factory('UserFactory', function($http) {
 
 	// create message
 	factory.create = function(message, callback){
+		console.log('here');
 		$http.post('/users/travelTime', message).success(function(data){
 			message['CurrentTime'] = data.CurrentTime;
 			$http.post('/users/createMessage', message).success(function(data) {
